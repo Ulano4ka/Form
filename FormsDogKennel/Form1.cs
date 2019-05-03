@@ -4,10 +4,13 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Imaging;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml.Serialization;
 
 namespace FormsDogKennel
 {
@@ -105,6 +108,63 @@ namespace FormsDogKennel
         private void listBox2_SelectedIndexChanged(object sender, EventArgs e)
         {
             button5.Enabled = listBox2.SelectedItem is Employee;
+        }
+
+        private void LoadToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var ofd = new OpenFileDialog() { Filter = "Питомник|*.dogs" };
+
+            if (ofd.ShowDialog(this) != DialogResult.OK)
+                return;
+            var xs = new XmlSerializer(typeof(KennelOfDog));
+            var file = File.OpenRead(ofd.FileName);
+            var kennel = (KennelOfDog)xs.Deserialize(file);
+            file.Close();
+
+            textBox1.Text = kennel.Name;
+
+            var ms = new MemoryStream(kennel.Photo);
+            pictureBox1.Image = Image.FromStream(ms);
+
+            textBox2.Text = kennel.Address;
+
+            listBox1.Items.Clear();
+            listBox2.Items.Clear();
+            foreach (var dog in kennel.Dog)
+            {
+                listBox1.Items.Add(dog);
+            }
+            foreach (var employee in kennel.Employee)
+            {
+                listBox2.Items.Add(employee);
+            }
+        }
+
+        private void SaveToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var sfd = new SaveFileDialog() { Filter = "Питомник|*.dogs" };
+
+            if (sfd.ShowDialog(this) != DialogResult.OK)
+                return;
+
+            var kennel = new KennelOfDog()
+            {
+                Name = textBox1.Text,
+                Address = textBox2.Text,
+                Dog = listBox1.Items.OfType<Dog>().ToList(),
+                Employee = listBox2.Items.OfType<Employee>().ToList()
+            };
+
+            var stream = new MemoryStream();
+            pictureBox1.Image.Save(stream, ImageFormat.Jpeg);
+            kennel.Photo = stream.ToArray();
+
+            var xs = new XmlSerializer(typeof(KennelOfDog));
+
+            var file = File.Create(sfd.FileName);
+
+            xs.Serialize(file, kennel);
+            file.Close();
         }
     }
 }

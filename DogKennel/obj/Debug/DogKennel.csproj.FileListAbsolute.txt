@@ -4,3 +4,9 @@ C:\Users\Юлия\Desktop\Новая папка (4)\DogKennel\obj\Debug\DogKenne
 C:\Users\Юлия\Desktop\Новая папка (4)\DogKennel\obj\Debug\DogKennel.csproj.CoreCompileInputs.cache
 C:\Users\Юлия\Desktop\Новая папка (4)\DogKennel\obj\Debug\DogKennel.dll
 C:\Users\Юлия\Desktop\Новая папка (4)\DogKennel\obj\Debug\DogKennel.pdb
+C:\Users\Юлия\Desktop\Anytask\DogKennel\bin\Debug\DogKennel.dll
+C:\Users\Юлия\Desktop\Anytask\DogKennel\bin\Debug\DogKennel.pdb
+C:\Users\Юлия\Desktop\Anytask\DogKennel\obj\Debug\DogKennel.csprojAssemblyReference.cache
+C:\Users\Юлия\Desktop\Anytask\DogKennel\obj\Debug\DogKennel.csproj.CoreCompileInputs.cache
+C:\Users\Юлия\Desktop\Anytask\DogKennel\obj\Debug\DogKennel.dll
+C:\Users\Юлия\Desktop\Anytask\DogKennel\obj\Debug\DogKennel.pdb
